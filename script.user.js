@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         Auto Refresh with Timer for Cloudphone
+// @name         Auto Refresh Cloudphone
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Refresh the page every 1 minute with a visible countdown timer
-// @author       
+// @description  Refresh the page every 9 to 11 minutes with a centered countdown timer
+// @author
 // @match        https://cloudphoneh5.buy.139.com/*
 // @grant        none
 // ==/UserScript==
@@ -11,26 +11,33 @@
 (function() {
     'use strict';
 
-    // 1 minute in milliseconds
-    const refreshInterval = 1 * 60 * 1000;
-    let timeLeft = refreshInterval / 1000;
+    // Random interval between 9 to 11 minutes in milliseconds
+    const minInterval = 9 * 60 * 1000;
+    const maxInterval = 11 * 60 * 1000;
+    const refreshInterval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
+    let timeLeft = refreshInterval / 1000; // convert to seconds
 
-    // Create a timer element
+    // Create a centered floating timer element
     const timerDiv = document.createElement('div');
     timerDiv.style.position = 'fixed';
-    timerDiv.style.top = '10px';
-    timerDiv.style.right = '10px';
-    timerDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    timerDiv.style.top = '50%';
+    timerDiv.style.left = '50%';
+    timerDiv.style.transform = 'translate(-50%, -50%)';
+    timerDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
     timerDiv.style.color = 'white';
-    timerDiv.style.padding = '10px';
-    timerDiv.style.borderRadius = '5px';
+    timerDiv.style.padding = '20px';
+    timerDiv.style.borderRadius = '10px';
     timerDiv.style.zIndex = '1000';
+    timerDiv.style.fontSize = '20px';
+    timerDiv.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
     document.body.appendChild(timerDiv);
 
     // Update the timer every second
     const updateTimer = setInterval(() => {
         timeLeft--;
-        timerDiv.textContent = `Page refreshes in: ${timeLeft}s`;
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = Math.floor(timeLeft % 60);
+        timerDiv.textContent = `Page refreshes in: ${minutes}m ${seconds}s`;
 
         if (timeLeft <= 0) {
             clearInterval(updateTimer);
