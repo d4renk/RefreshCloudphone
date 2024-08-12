@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Auto Refresh Cloudphone
+// @name         RefreshCloudphone
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Refresh the page every 9 to 11 minutes without a visible timer
+// @description  10-20
 // @author
 // @match        https://cloudphoneh5.buy.139.com/*
 // @grant        none
@@ -11,13 +11,6 @@
 (function() {
     'use strict';
 
-    // Random interval between 9 to 11 minutes in milliseconds
-    const minInterval = 9 * 60 * 1000;
-    const maxInterval = 11 * 60 * 1000;
-    const refreshInterval = Math.floor(Math.random() * (maxInterval - minInterval + 1)) + minInterval;
-
-    // Refresh the page after the interval
-    setTimeout(() => {
-        location.reload();
-    }, refreshInterval);
+    // 10-20
+    setTimeout(() => location.reload(), Math.random() * 10000 + 10000);
 })();
