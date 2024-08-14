@@ -2,7 +2,7 @@
 // @name         Auto Refresh Cloudphone
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  
+// @description  Refresh every 4-5 minutes with a countdown
 // @author
 // @match        https://cloudphoneh5.buy.139.com/*
 // @grant        none
@@ -12,7 +12,7 @@
     'use strict';
 
     function refreshPage() {
-        const refreshInterval = Math.random() * 10000 + 10000;
+        const refreshInterval = Math.random() * 60000 + 240000; // 240000ms to 300000ms (4-5 minutes)
         let timeLeft = Math.round(refreshInterval / 1000);
 
         const timerDiv = document.createElement('div');
