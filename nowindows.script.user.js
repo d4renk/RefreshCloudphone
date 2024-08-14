@@ -2,7 +2,7 @@
 // @name         RefreshCloudphone
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  10-20
+// @description  Refresh every 4-5 minutes
 // @author
 // @match        https://cloudphoneh5.buy.139.com/*
 // @grant        none
@@ -11,6 +11,6 @@
 (function() {
     'use strict';
 
-    // 10-20
-    setTimeout(() => location.reload(), Math.random() * 10000 + 10000);
+    // Refresh every 4-5 minutes
+    setTimeout(() => location.reload(), Math.random() * 60000 + 240000);
 })();
