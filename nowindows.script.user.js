@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         RefreshCloudphone
 // @namespace    http://tampermonkey.net/
-// @version      1.2
-// @description  Refresh every 4-5 minutes
+// @version      1.5
+// @description  
 // @author
 // @match        https://cloudphoneh5.buy.139.com/*
 // @grant        none
@@ -12,8 +12,16 @@
     'use strict';
 
     const refreshPage = () => location.reload(true);
-    const refreshInterval = Math.random() * 60000 + 240000;
-    setTimeout(refreshPage, refreshInterval);
+    const twelveHours = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
+    setTimeout(refreshPage, twelveHours);
+
+    // Use a low-bitrate silent audio to reduce memory usage
+    const audio = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIAfAAACABAAZGF0YQAAAAA=');
+    audio.loop = true;
+    audio.volume = 0; // Ensure it's completely silent
+    audio.play().catch(() => {
+        console.log('Audio playback failed.');
+    });
 
     window.addEventListener('beforeunload', () => {
         let highestTimeoutId = setTimeout(() => {});
