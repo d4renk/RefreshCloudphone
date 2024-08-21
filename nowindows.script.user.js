@@ -11,9 +11,17 @@
 (function() {
     'use strict';
 
-    const refreshPage = () => location.reload(true);
-    const twelveHours = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
-    setTimeout(refreshPage, twelveHours);
+    const refreshInterval = Math.floor(Math.random() * (60 - 50 + 1) + 50) * 60 * 1000; // Random between 50-60 minutes
+
+    const refreshPage = () => {
+        if (window.location.href.includes('lockStatus=0')) {
+            window.location.href = window.location.href.replace('lockStatus=0', 'lockStatus=1');
+        } else {
+            location.reload(true);
+        }
+    };
+
+    setInterval(refreshPage, refreshInterval);
 
     // Use a low-bitrate silent audio to reduce memory usage
     const audio = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIAfAAACABAAZGF0YQAAAAA=');
